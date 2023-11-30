@@ -86,7 +86,7 @@ session_start();
         <?php } ?>
       </section>
       <input class="w-full bg-white focus:bg-white py-2 px-3 rounded-md border-2 border-gray-300 transition-all duration-500
-        outline-none focus:border-[#003568] focus:text-[#004e94] mb-5 mt-3" name="age" placeholder="69"
+        outline-none focus:border-[#003568] focus:text-[#004e94] mb-5 mt-3" name="age" placeholder="69" type="number"
         value="<?php if(isset($_SESSION['age'])) echo $_SESSION['age']; ?>">
 
       <section class="lg:flex block duration-300">

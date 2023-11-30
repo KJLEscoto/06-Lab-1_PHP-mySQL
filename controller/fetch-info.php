@@ -96,7 +96,7 @@ if (isset($_POST['submit-form'])) {
         unset($_SESSION['mid_ini']);
         header("Location: " . $direction_index . "middle=" . urlencode($error_midname[0]));
         exit;
-    }
+    }    
 
     $error_lname = array("Last Name is required", "Last Name should only contain letters and a dot");
 
@@ -108,24 +108,26 @@ if (isset($_POST['submit-form'])) {
         header("Location: " . $direction_index . "last=" . urlencode($error_lname[1]));
         exit;
     }
-
-    $error_age = array("Age is required", "Age should be a number", "Age cannot be below 0");
+    
+    $error_age = array("Age is required and cannot be 0", "Age should be a whole number", "Age cannot be below 0");
 
     if (empty($_SESSION['age'])) {
         header("Location: " . $direction_index . "age=" . urlencode($error_age[0]));
         exit;
     }
-
-    if (!is_numeric($_SESSION['age'])) {
+    
+    if (!filter_var($_SESSION['age'], FILTER_VALIDATE_INT)) {
         unset($_SESSION['age']);
         header("Location: " . $direction_index . "age=" . urlencode($error_age[1]));
         exit;
-    } elseif ($_SESSION['age'] < 0) {
+    }
+    
+    if ($_SESSION['age'] <= 0) {
         unset($_SESSION['age']);
         header("Location: " . $direction_index . "age=" . urlencode($error_age[2]));
         exit;
-    }
-
+    }    
+    
     $error_contact = array("Contact Number is required", "Invalid Contact Number format", "Contact Number cannot contain letters");
 
     if (empty($_SESSION['contact'])) {
